@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="诗和田野">
 <meta property="og:description" content="准备工作 hexo已经按照完成 已经注册GitHub账户  开始工作 在github账户中建立一个新的代码库名字就是你用户名+.github.io, 例如我的用户名为henry2young 那么我建立的仓库为henry2young.github.io 建立成成功后即便可以访问https://henry2young.github.io/    在你的hexo项目目录配置文件中找到 1234deplo">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-01T09:18:56.000Z">
+<meta property="og:updated_time" content="2017-09-01T09:32:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="hexo上传到GitHub">
 <meta name="twitter:description" content="准备工作 hexo已经按照完成 已经注册GitHub账户  开始工作 在github账户中建立一个新的代码库名字就是你用户名+.github.io, 例如我的用户名为henry2young 那么我建立的仓库为henry2young.github.io 建立成成功后即便可以访问https://henry2young.github.io/    在你的hexo项目目录配置文件中找到 1234deplo">
@@ -380,8 +380,12 @@
 <li>建立成成功后即便可以访问<a><a href="https://henry2young.github.io/" target="_blank" rel="external">https://henry2young.github.io/</a></a>  </li>
 </ul>
 <p>在你的hexo项目目录配置文件中找到</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: git@github.com:henrY2Young/henrY2Young.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
-<p>然后按自己的情况进行配置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  <span class="built_in">type</span>: git</div><div class="line">  repo: https://github.com/henrY2Young/henrY2Young.github.io</div><div class="line">  branch: master</div></pre></td></tr></table></figure>
+<p>然后按自己的情况进行配置,运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">hexo d <span class="comment">#如果没有报错就能在网页上浏览了</span></div></pre></td></tr></table></figure>
+<p>下面总结下发布的总体流程吧</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">hexo new <span class="string">"新的文章"</span></div><div class="line">hexo g 生成新的静态文件</div><div class="line">hexo  d 发布到GitHub</div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们可以买一个域名然后将域名指向Github，这里我就不操作了，因为我米有域名。还有就是写文章的时候用到的MarkDown语法，它是一个让你专心于码字，而不用担心排版的标记语言，有机会可以总结下方法写下来</p>
 
       
     </div>
@@ -559,7 +563,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始工作"><span class="nav-number">2.</span> <span class="nav-text">开始工作</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始工作"><span class="nav-number">2.</span> <span class="nav-text">开始工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
