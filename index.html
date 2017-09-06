@@ -370,14 +370,13 @@
       
         
           
-            <p>###准备工作</p>
-<ul>
+            <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
 <li>python环境（pip等）</li>
 <li>Django已经按照完成</li>
 <li>nginx按照</li>
 </ul>
 <p>以上是基本的条件，如果没有安装，请安装完</p>
-<p>###开始工作<br>我们使用的是gunicorn+supervisor进行部署和进行进程管理<br>首先安装gunicorn</p>
+<h3 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h3><p>我们使用的是gunicorn+supervisor进行部署和进行进程管理<br>首先安装gunicorn</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install gunicorn</div></pre></td></tr></table></figure>
 <p>gunincorn的基本用法</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi <span class="comment">#XXX为你自己的项目的项目名</span></div></pre></td></tr></table></figure>
@@ -394,7 +393,7 @@
 <p>通过上面的命令 我们在8001上建立了一个项目，其实如果开启8001端口是可以在外网直接访问的，但是也可以用Nginx做映射</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen   80;</div><div class="line">        server_name 你的服务名;</div><div class="line">        access_log  /var/<span class="built_in">log</span>/nginx/isaced.log;</div><div class="line">         location / &#123;</div><div class="line">                proxy_pass http://127.0.0.1:8001;</div><div class="line">                proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">                proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">                proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         &#125;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
 <p>这样我们就可以在80端口进行访问了</p>
-<p>###总结<br>我们用gunicorn+supervisor部署了Django系统，同时用Nginx进行了端口的映射</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们用gunicorn+supervisor部署了Django系统，同时用Nginx进行了端口的映射</p>
 
           
         

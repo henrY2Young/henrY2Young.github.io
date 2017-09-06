@@ -107,18 +107,18 @@
 
 
 
-<meta name="description" content="###准备工作  python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 ###开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi">
+<meta name="description" content="准备工作 python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi #XXX为你自">
 <meta name="keywords" content="python,Django">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python Django部署">
 <meta property="og:url" content="http://yoursite.com/2017/09/06/python-Django部署/index.html">
 <meta property="og:site_name" content="诗和田野">
-<meta property="og:description" content="###准备工作  python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 ###开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi">
+<meta property="og:description" content="准备工作 python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi #XXX为你自">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-06T14:25:47.000Z">
+<meta property="og:updated_time" content="2017-09-06T14:28:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python Django部署">
-<meta name="twitter:description" content="###准备工作  python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 ###开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi">
+<meta name="twitter:description" content="准备工作 python环境（pip等） Django已经按照完成 nginx按照  以上是基本的条件，如果没有安装，请安装完 开始工作我们使用的是gunicorn+supervisor进行部署和进行进程管理首先安装gunicorn 1pip install gunicorn gunincorn的基本用法 1gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi #XXX为你自">
 
 
 
@@ -370,14 +370,13 @@
       
 
       
-        <p>###准备工作</p>
-<ul>
+        <h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
 <li>python环境（pip等）</li>
 <li>Django已经按照完成</li>
 <li>nginx按照</li>
 </ul>
 <p>以上是基本的条件，如果没有安装，请安装完</p>
-<p>###开始工作<br>我们使用的是gunicorn+supervisor进行部署和进行进程管理<br>首先安装gunicorn</p>
+<h3 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h3><p>我们使用的是gunicorn+supervisor进行部署和进行进程管理<br>首先安装gunicorn</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install gunicorn</div></pre></td></tr></table></figure>
 <p>gunincorn的基本用法</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi <span class="comment">#XXX为你自己的项目的项目名</span></div></pre></td></tr></table></figure>
@@ -394,7 +393,7 @@
 <p>通过上面的命令 我们在8001上建立了一个项目，其实如果开启8001端口是可以在外网直接访问的，但是也可以用Nginx做映射</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen   80;</div><div class="line">        server_name 你的服务名;</div><div class="line">        access_log  /var/<span class="built_in">log</span>/nginx/isaced.log;</div><div class="line">         location / &#123;</div><div class="line">                proxy_pass http://127.0.0.1:8001;</div><div class="line">                proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">                proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">                proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         &#125;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
 <p>这样我们就可以在80端口进行访问了</p>
-<p>###总结<br>我们用gunicorn+supervisor部署了Django系统，同时用Nginx进行了端口的映射</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们用gunicorn+supervisor部署了Django系统，同时用Nginx进行了端口的映射</p>
 
       
     </div>
@@ -489,8 +488,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -555,6 +563,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始工作"><span class="nav-number">2.</span> <span class="nav-text">开始工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
