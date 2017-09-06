@@ -277,6 +277,172 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/python-Django部署/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Herry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗和田野">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/06/python-Django部署/" itemprop="url">python Django部署</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-06T21:56:28+08:00">
+                2017-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/python/" itemprop="url" rel="index">
+                    <span itemprop="name">python</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>###准备工作</p>
+<ul>
+<li>python环境（pip等）</li>
+<li>Django已经按照完成</li>
+<li>nginx按照</li>
+</ul>
+<p>以上是基本的条件，如果没有安装，请安装完</p>
+<p>###开始工作<br>我们使用的是gunicorn+supervisor进行部署和进行进程管理<br>首先安装gunicorn</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install gunicorn</div></pre></td></tr></table></figure>
+<p>gunincorn的基本用法</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">gunicorn -w 4 -b 0.0.0.0:8001 XXX.wsgi <span class="comment">#XXX为你自己的项目的项目名</span></div></pre></td></tr></table></figure>
+<p>安装supervisor，supervisor是一个专门进行项目进程管理的插件<br>安装命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install supervisor</div></pre></td></tr></table></figure>
+<p>我们首先要建立一个基本的配置目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">echo_supervisord_conf &gt; /etc/supervisord.conf <span class="comment">#生成默认的配置文件</span></div></pre></td></tr></table></figure>
+<p>在目录的最底部我们修改成，然后在相应的位置建立/etc/supervisor/conf.d/  目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">[include]</div><div class="line">files = /etc/supervisor/conf.d/*.conf</div></pre></td></tr></table></figure>
+<p>我们所有的配置文件都放到conf.d 目录下，在conf.d目录下建立testDjango。conf</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[program:testDjango] <span class="comment">#项目名</span></div><div class="line">directory = /data/pyhontwww/pythonDjango/django1 ;项目目录地址</div><div class="line"><span class="built_in">command</span>=gunicorn -w4 -b0.0.0.0:8001 django1.wsgi ;启动项目命令</div><div class="line">startsecs=0 ;启动0秒后没有异常退出</div><div class="line">stopwaitsecs=0 ;等待0秒后没有异常退出</div><div class="line">autostart=<span class="literal">true</span>  ;在 supervisord 启动的时候也自动启动</div><div class="line">autorestart=<span class="literal">true</span>  ;程序异常退出后自动重启</div></pre></td></tr></table></figure>
+<p>supervisor的基本命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">supervisorctl start | stop  | reatart  项目名</div><div class="line">或者 all 启动全部</div></pre></td></tr></table></figure>
+<p>通过上面的命令 我们在8001上建立了一个项目，其实如果开启8001端口是可以在外网直接访问的，但是也可以用Nginx做映射</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">        listen   80;</div><div class="line">        server_name 你的服务名;</div><div class="line">        access_log  /var/<span class="built_in">log</span>/nginx/isaced.log;</div><div class="line">         location / &#123;</div><div class="line">                proxy_pass http://127.0.0.1:8001;</div><div class="line">                proxy_set_header Host <span class="variable">$host</span>;</div><div class="line">                proxy_set_header X-Real-IP <span class="variable">$remote_addr</span>;</div><div class="line">                proxy_set_header X-Forwarded-For <span class="variable">$proxy_add_x_forwarded_for</span>;</div><div class="line">         &#125;</div><div class="line">      &#125;</div></pre></td></tr></table></figure>
+<p>这样我们就可以在80端口进行访问了</p>
+<p>###总结<br>我们用gunicorn+supervisor部署了Django系统，同时用Nginx进行了端口的映射</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/hexo上传到GitHub/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -931,7 +1097,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -942,7 +1108,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -953,7 +1119,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
