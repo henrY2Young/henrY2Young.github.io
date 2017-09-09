@@ -277,6 +277,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/09/mac下vim安装YouCompleteMe/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Herry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗和田野">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/09/mac下vim安装YouCompleteMe/" itemprop="url">mac下vim安装YouCompleteMe</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-09T21:31:18+08:00">
+                2017-09-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/便捷工作/" itemprop="url" rel="index">
+                    <span itemprop="name">便捷工作</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="mac下vim安装YouCompleteMe"><a href="#mac下vim安装YouCompleteMe" class="headerlink" title="mac下vim安装YouCompleteMe"></a>mac下vim安装YouCompleteMe</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>有一台mac电脑</li>
+<li>安装了vim</li>
+<li>安装了brew</li>
+</ul>
+<h3 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h3><p>   很久以前，我一直在用vi命令来进行文件的操作，因为vi只有两个字母，后来才发现其实用vim远比vi命令要好用的多，因为vim是vi命令的升级版，所以那些用vi的朋友，建议还是用vim来代替吧</p>
+<p> 闲话不多说,开始工作了！</p>
+<p> YouCompleteMe是一个神一样存在的自动补全插件，堪比IDE的自动补全功能，所以在我们用vim编写一些代码的时候（当然可能很少）可以给我们提示，我相信大多数的程序猿是记不住那么多的语言的函数的，即便记住可能也不会拼写对吧，所以这个就有用了。</p>
+<p> YouCompleteMe至少得vim7.4.1+以上才能支持，而我的mac是7.4所以我们先要升级下自己的vim版本</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew install mercurial</div><div class="line">brew install vim</div></pre></td></tr></table></figure>
+<p> 然后重启终端，输入</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">vim --version</div></pre></td></tr></table></figure>
+<p> 你会发现vim已经升级到8.0了</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"> 安装Vundle</div><div class="line"> $ git <span class="built_in">clone</span> https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim</div><div class="line"> 创建配置文件</div><div class="line"> vim ~/.vimrc</div><div class="line"> 在配置文件中写入,在begin和end之间写入要加载的插件</div><div class="line"> call vundle<span class="comment">#begin()</span></div><div class="line"> Plugin <span class="string">'Valloric/YouCompleteMe'</span></div><div class="line"> call vundle<span class="comment">#end()  </span></div><div class="line"> 打开vim 运行</div><div class="line"> PluginInstall</div><div class="line"> 这样就安装完成了</div><div class="line"> 下面进行编译，这里需要用到cmake，如果没有安装，请用brew安装</div><div class="line"> <span class="built_in">cd</span> ~/.vim/bundle/YouCompleteMe</div><div class="line"> ./install.sh</div><div class="line"> 下面是在.vimrc中的一些配置，当然你也可以不用哦</div><div class="line"> <span class="string">" 自动补全配置</span></div><div class="line"><span class="string"> set completeopt=longest,menu</span></div><div class="line"><span class="string">"</span> <span class="string">"让Vim的补全菜单行为与一般IDE一致(参考VimTip1228)</span></div><div class="line"><span class="string"> autocmd InsertLeave * if pumvisible() == 0|pclose|endif</span></div><div class="line"><span class="string">"</span> 离开插入模式后自动关闭预览窗口</div><div class="line">inoremap &lt;expr&gt; &lt;CR&gt;       pumvisible() ? <span class="string">"\&lt;C-y&gt;"</span> : <span class="string">"\&lt;CR&gt;"</span></div><div class="line"><span class="string">" 回车即选中当前项</span></div><div class="line"><span class="string">"</span> 上下左右键的行为 会显示其他信息</div><div class="line"> inoremap &lt;expr&gt; &lt;Down&gt;     pumvisible() ? <span class="string">"\&lt;C-n&gt;"</span> : <span class="string">"\&lt;Down&gt;"</span></div><div class="line"> inoremap &lt;expr&gt; &lt;Up&gt;       pumvisible() ? <span class="string">"\&lt;C-p&gt;"</span> : <span class="string">"\&lt;Up&gt;"</span></div><div class="line"> inoremap &lt;expr&gt; &lt;PageDown&gt; pumvisible() ? \&lt;PageDown&gt;\&lt;C-p&gt;\&lt;C-n&gt;<span class="string">" : "</span>\&lt;PageDown&gt;<span class="string">"</span></div><div class="line"><span class="string"> inoremap &lt;expr&gt; &lt;PageUp&gt;   pumvisible() ? "</span>\&lt;PageUp&gt;\&lt;C-p&gt;\&lt;C-n&gt;<span class="string">" :"</span>\&lt;PageUp&gt;<span class="string">"</span></div></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>have a good time</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/06/python-Django部署/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1096,7 +1252,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1107,7 +1263,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1118,7 +1274,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">6</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
