@@ -115,7 +115,7 @@
 <meta property="og:site_name" content="诗和田野">
 <meta property="og:description" content="mac下使用xhprof测试php代码性能准备工作 安装了brew  开始工作 关于xhprof:  XHProf 是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。一个函数的开销，可细分成调用者和被调用者的开销。原始数据收集部分是用纯C实现的，是一个名叫xhprof的 Zend扩展 。XHProf有一个简单的HTML的用户界面（ PHP写成">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-12T06:19:44.000Z">
+<meta property="og:updated_time" content="2017-09-12T07:25:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用xhprof测试php代码性能">
 <meta name="twitter:description" content="mac下使用xhprof测试php代码性能准备工作 安装了brew  开始工作 关于xhprof:  XHProf 是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。一个函数的开销，可细分成调用者和被调用者的开销。原始数据收集部分是用纯C实现的，是一个名叫xhprof的 Zend扩展 。XHProf有一个简单的HTML的用户界面（ PHP写成">
@@ -390,6 +390,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xhprof_enable();//开启xhprof</div><div class="line">‘..........<span class="string">'这里是你要测试的代码</span></div><div class="line"><span class="string">$xhprof_data = xhprof_disable();//开启展示</span></div><div class="line"><span class="string">include_once "/usr/local/www/xhprof_lib/utils/xhprof_lib.php";</span></div><div class="line"><span class="string">include_once "/usr/local/www/xhprof_lib/utils/xhprof_runs.php";</span></div><div class="line"><span class="string">//引入以上两个文件，这里的文件在xhprof_lib中</span></div><div class="line"><span class="string">$xhprof_runs = new XHProfRuns_Default();</span></div><div class="line"><span class="string">$run_id = $xhprof_runs-&gt;save_run($xhprof_data, "xhprof");</span></div><div class="line"><span class="string">echo $run_id//输出的文件会根据run_id在xhprof中生成展示文件。我们可以利用run_id查看图形化输出</span></div></pre></td></tr></table></figure>
 <p>我们可以访问<a>http://<xhprof-ui-address>/index.php?run=run_id&amp;source=xhprof</xhprof-ui-address></a>这里的<xhprof-ui-address>我们就是在Nginx配置的域名xhproftest.com，run_id就是输出的run_id<br>至此我们已经配置完成了</xhprof-ui-address></p>
 <p>最后给出php官方文档中的地址：<a><a href="http://php.net/manual/zh/book.xhprof.php" target="_blank" rel="external">http://php.net/manual/zh/book.xhprof.php</a></a></p>
+<ul>
+<li>ps：安装graphviz,生成程序运行的流程图</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install graphviz</div></pre></td></tr></table></figure>
 <h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> 有些时候php程序运行太慢了我们就可以看到到底是什么拖慢了运行速度了</p>
 
       
