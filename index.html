@@ -277,6 +277,168 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/12/使用xhprof测试php代码性能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Herry">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="诗和田野">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/09/12/使用xhprof测试php代码性能/" itemprop="url">使用xhprof测试php代码性能</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-12T13:51:04+08:00">
+                2017-09-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/php/" itemprop="url" rel="index">
+                    <span itemprop="name">php</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="mac下使用xhprof测试php代码性能"><a href="#mac下使用xhprof测试php代码性能" class="headerlink" title="mac下使用xhprof测试php代码性能"></a>mac下使用xhprof测试php代码性能</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>安装了brew</li>
+</ul>
+<h3 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h3><p> 关于xhprof:</p>
+<p> XHProf 是一个分层PHP性能分析工具。它报告函数级别的请求次数和各种指标，包括阻塞时间，CPU时间和内存使用情况。一个函数的开销，可细分成调用者和被调用者的开销。原始数据收集部分是用纯C实现的，是一个名叫xhprof的 Zend扩展 。XHProf有一个简单的HTML的用户界面（ PHP写成的）。基于浏览器的性能分析用户界面能更容易查看，或是与同行们分享成果。也能绘制调用关系图。</p>
+<p>XHProf 报告往往可以有助于理解被执行的代码的结构。的等级性质的报告可用来确定，例如，什么链要求导致了所谓的特殊功能得到。</p>
+<p>   XHProf 可以比较两次运行的结果（又名“差异报告”）或是从多次运行得到的汇总数据。差异和汇总报告，就像单一运行报告一样，也提供“平板”以及“分层”的性能分析视图。<br>XHProf 是一种轻量级的性能分析工具。在数据收集阶段，它记录调用次数的追踪和包容性的指标弧在动态callgraph的一个程序。它独有的数据计算的报告/后处理阶段。在数据收集时，XHProfd通过检测循环来处理递归的函数调用，并通过给递归调用中每个深度的调用一个有用的命名来避开死循环。</p>
+<p>XHProf 的轻量级性质和汇聚功能，使得它非常适合用于收集“生产环境”的性能统计数据的统计</p>
+<p>利用brew安装xhprof</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install homebrew/php/php56-xhprof</div></pre></td></tr></table></figure>
+<p>然后在电脑中brew默认的安装位置会出现xhprof_html和xhprof_lib两个文件夹，将这个两个文件夹copy到你自己的www目录中你自己建立的文件夹中</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">cp -r xhprof_html /usr/<span class="built_in">local</span>/www/xhprof</div><div class="line">cp -r xhprof_lib /usr/<span class="built_in">local</span>/www/xhprof</div></pre></td></tr></table></figure>
+<p>同时在www目录中的xhprof中建立一个xhprof_run文件夹，这里是作为测试文件的输出文件<br>然后在php的配置文件中配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xhprof.output_dir=/usr/<span class="built_in">local</span>/www/xhprof/xhprof_runs/</div></pre></td></tr></table></figure></p>
+<p>因为是使用了brew所以配置文件是在conf.d中的ext-xhprof.conf中的<br>以上配置完成后我们再利用Nginx配置一个现实的网站，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">    listen 80;</div><div class="line">    server_name www.xhproftest.com xhproftest.com;</div><div class="line">    root /usr/<span class="built_in">local</span>/www/xhprof/xhprof_html;</div><div class="line">    index index.html index.php;</div><div class="line">    location ~ \.php$ &#123;</div><div class="line">        fastcgi_pass php_pool;</div><div class="line">        fastcgi_index index.php;</div><div class="line">        include fastcgi.conf;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>重启php和nginx</p>
+<p>下一步我们就是在代码中使用xhprof了，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">xhprof_enable();//开启xhprof</div><div class="line">‘..........<span class="string">'这里是你要测试的代码</span></div><div class="line"><span class="string">$xhprof_data = xhprof_disable();//开启展示</span></div><div class="line"><span class="string">include_once "/usr/local/www/xhprof_lib/utils/xhprof_lib.php";</span></div><div class="line"><span class="string">include_once "/usr/local/www/xhprof_lib/utils/xhprof_runs.php";</span></div><div class="line"><span class="string">//引入以上两个文件，这里的文件在xhprof_lib中</span></div><div class="line"><span class="string">$xhprof_runs = new XHProfRuns_Default();</span></div><div class="line"><span class="string">$run_id = $xhprof_runs-&gt;save_run($xhprof_data, "xhprof");</span></div><div class="line"><span class="string">echo $run_id//输出的文件会根据run_id在xhprof中生成展示文件。我们可以利用run_id查看图形化输出</span></div></pre></td></tr></table></figure>
+<p>我们可以访问<a>http://<xhprof-ui-address>/index.php?run=run_id&amp;source=xhprof</xhprof-ui-address></a>这里的<xhprof-ui-address>我们就是在Nginx配置的域名xhproftest.com，run_id就是输出的run_id<br>至此我们已经配置完成了</xhprof-ui-address></p>
+<p>最后给出php官方文档中的地址：<a><a href="http://php.net/manual/zh/book.xhprof.php" target="_blank" rel="external">http://php.net/manual/zh/book.xhprof.php</a></a></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p> 有些时候php程序运行太慢了我们就可以看到到底是什么拖慢了运行速度了</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/09/mac下vim安装YouCompleteMe/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1252,7 +1414,7 @@
             
               <a href="/archives/">
             
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -1263,7 +1425,7 @@
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">5</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -1274,7 +1436,7 @@
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
