@@ -91,7 +91,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="生活," />
+  <meta name="keywords" content="ssh,linux," />
 
 
 
@@ -107,18 +107,18 @@
 
 
 
-<meta name="description" content="第一篇文章">
-<meta name="keywords" content="生活">
+<meta name="description" content="mac配置ssh秘钥登录准备工作 已经安装了ssh以及sh-copy-id（用于将秘钥copy到远处服务器）  开始工作 生成本地秘钥 123ssh-keygen -t rsa -C  &apos;message&apos;-t ：秘钥的类型-C ：描述 可省略    将秘钥上传到远处服务器 123scp ~/.ssh/id_rsa.pub 你服务器登录名@IP地址:~/注意的是这里默认是你的~/下面有.ssh目录，">
+<meta name="keywords" content="ssh,linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="生活随笔">
-<meta property="og:url" content="http://yoursite.com/2017/09/01/生活随笔/index.html">
+<meta property="og:title" content="mac配置ssh秘钥登录">
+<meta property="og:url" content="http://yoursite.com/2017/09/16/mac配置ssh秘钥登录/index.html">
 <meta property="og:site_name" content="诗和田野">
-<meta property="og:description" content="第一篇文章">
+<meta property="og:description" content="mac配置ssh秘钥登录准备工作 已经安装了ssh以及sh-copy-id（用于将秘钥copy到远处服务器）  开始工作 生成本地秘钥 123ssh-keygen -t rsa -C  &apos;message&apos;-t ：秘钥的类型-C ：描述 可省略    将秘钥上传到远处服务器 123scp ~/.ssh/id_rsa.pub 你服务器登录名@IP地址:~/注意的是这里默认是你的~/下面有.ssh目录，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-01T07:18:21.000Z">
+<meta property="og:updated_time" content="2017-09-16T04:22:52.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="生活随笔">
-<meta name="twitter:description" content="第一篇文章">
+<meta name="twitter:title" content="mac配置ssh秘钥登录">
+<meta name="twitter:description" content="mac配置ssh秘钥登录准备工作 已经安装了ssh以及sh-copy-id（用于将秘钥copy到远处服务器）  开始工作 生成本地秘钥 123ssh-keygen -t rsa -C  &apos;message&apos;-t ：秘钥的类型-C ：描述 可省略    将秘钥上传到远处服务器 123scp ~/.ssh/id_rsa.pub 你服务器登录名@IP地址:~/注意的是这里默认是你的~/下面有.ssh目录，">
 
 
 
@@ -148,13 +148,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/09/01/生活随笔/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/09/16/mac配置ssh秘钥登录/"/>
 
 
 
 
 
-  <title>生活随笔 | 诗和田野</title>
+  <title>mac配置ssh秘钥登录 | 诗和田野</title>
   
 
 
@@ -281,7 +281,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/01/生活随笔/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/09/16/mac配置ssh秘钥登录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Herry">
@@ -298,7 +298,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">生活随笔</h1>
+          <h1 class="post-title" itemprop="name headline">mac配置ssh秘钥登录</h1>
         
 
         <div class="post-meta">
@@ -310,8 +310,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-01T15:18:21+08:00">
-                2017-09-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-16T11:41:32+08:00">
+                2017-09-16
               </time>
             
 
@@ -333,8 +333,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">生活随笔</span>
+                  <a href="/categories/linux服务器/" itemprop="url" rel="index">
+                    <span itemprop="name">linux服务器</span>
                   </a>
                 </span>
 
@@ -370,7 +370,26 @@
       
 
       
-        <p>第一篇文章</p>
+        <h2 id="mac配置ssh秘钥登录"><a href="#mac配置ssh秘钥登录" class="headerlink" title="mac配置ssh秘钥登录"></a>mac配置ssh秘钥登录</h2><h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ul>
+<li>已经安装了ssh以及sh-copy-id（用于将秘钥copy到远处服务器）</li>
+</ul>
+<h3 id="开始工作"><a href="#开始工作" class="headerlink" title="开始工作"></a>开始工作</h3><ul>
+<li><p>生成本地秘钥</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ssh-keygen -t rsa -C  <span class="string">'message'</span></div><div class="line">-t ：秘钥的类型</div><div class="line">-C ：描述 可省略</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<ul>
+<li><p>将秘钥上传到远处服务器</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">scp ~/.ssh/id_rsa.pub 你服务器登录名@IP地址:~/</div><div class="line">注意的是这里默认是你的~/下面有.ssh目录，如果没有，请</div><div class="line">mkdir .shh</div></pre></td></tr></table></figure>
+</li>
+<li><p>配置config快速登录</p>
+<p> 现在配置完成后是要需要</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">  ssh Username@HostIP</div><div class="line">  然后输入密码的 </div><div class="line"> ``` </div><div class="line"> so</div><div class="line"> 下一步我们要省去这一步</div><div class="line"> </div><div class="line"> ```bash</div><div class="line"> vim ~/.ssh/config 建立config文件</div><div class="line"></div><div class="line">内容为:</div><div class="line">   Host            <span class="built_in">alias</span> <span class="comment">#自定义别名</span></div><div class="line">   HostName        hostname  <span class="comment">#你的ssh服务器ip</span></div><div class="line">   Port            port <span class="comment">#ssh服务器端口，默认为22</span></div><div class="line">   User            user <span class="comment">#ssh服务器用户名</span></div><div class="line">   IdentityFile    ~/.ssh/id_rsa <span class="comment">#的公钥文件对应的私钥文件</span></div></pre></td></tr></table></figure>
+<p>我们这样就可以用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh 你定义的别名进行免密码登录了</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>这种方式方便快捷而且不会忘记密码哦</p>
 
       
     </div>
@@ -388,7 +407,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/生活/" rel="tag"># 生活</a>
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
+          
+            <a href="/tags/linux/" rel="tag"># linux</a>
           
         </div>
       
@@ -401,15 +422,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/09/13/php-spl-autoload-register-与命名空间/" rel="next" title="php spl_autoload_register 与命名空间">
+                <i class="fa fa-chevron-left"></i> php spl_autoload_register 与命名空间
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/01/Hexo-建立你的博客/" rel="prev" title="Hexo 建立你的博客">
-                Hexo 建立你的博客 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -463,8 +484,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -529,6 +559,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#mac配置ssh秘钥登录"><span class="nav-number">1.</span> <span class="nav-text">mac配置ssh秘钥登录</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备工作"><span class="nav-number">1.1.</span> <span class="nav-text">准备工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#开始工作"><span class="nav-number">1.2.</span> <span class="nav-text">开始工作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.3.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
